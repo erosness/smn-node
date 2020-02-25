@@ -1,0 +1,14 @@
+{
+  "name": "smn-server",
+  "version": "1.0.0",
+  "description": "Server based on nodejs for sm",
+  "main": "app/App.js",
+  "author": "Erik Rosness",
+  "license": "ISC",
+  "scripts": {
+    "build": "webpack -d"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
