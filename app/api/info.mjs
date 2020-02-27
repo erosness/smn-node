@@ -1,4 +1,6 @@
+import {getHostname} from '../access/system'
+
 export function info( req, res ) {
-  console.log("At info!!")
-  res.send("At info, responding...\n")
+  console.log("At infoXX!!")
+  res.json({ name: getHostname()})
 }
