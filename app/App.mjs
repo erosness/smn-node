@@ -1,3 +1,5 @@
+import {configInfo} from './config/configInfo';
+
 import {info} from './api/info';
 import {heat} from './api/heat';
 import {tempGet, tempPost} from './api/temp';
@@ -7,7 +9,7 @@ import express from 'express';
 const app = express()
 const port = 5066
 
-app.get('/', (req, res) => res.send('Hello World?'))
+app.get('/', (req, res) => res.send(`Hello World at ${configInfo["name"]}\n`))
 
 // Info API
 app.get('/info', info)
