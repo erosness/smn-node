@@ -1,4 +1,5 @@
 import {configInfo} from './config/configInfo';
+import {getHostname} from './access/system';
 
 import {info} from './api/info';
 import {heat} from './api/heat';
@@ -9,7 +10,7 @@ import express from 'express';
 const app = express()
 const port = 5066
 
-app.get('/', (req, res) => res.send(`Hello World at ${configInfo["name"]}\n`))
+app.get('/', (req, res) => res.send(`Hello World at ${getHostname()}\n`))
 
 // Info API
 app.get('/info', info)
