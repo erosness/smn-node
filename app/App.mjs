@@ -14,15 +14,15 @@ const port = 5066
 app.get('/', (req, res) => res.send(`Hello World at ${getHostname()}\n`))
 
 // Info API
-app.use('/info', infoMiddleware)
-app.get('/info', info)
+app.use('/v1/beha/info', infoMiddleware)
+app.get('/v1/beha/info', info)
 
 // Heat API
-app.get('/heat', heat)
+app.get('/v1/beha/heat', heat)
 
 // Temp API
-app.use('/temp' , tempMiddleware)
-app.get('/temp', tempGet)
-app.post('/temp', tempPost)
+app.use('/v1/beha/temp' , tempMiddleware)
+app.get('/v1/beha/temp', tempGet)
+app.post('/v1/beha/temp', tempPost)
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
