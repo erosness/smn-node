@@ -5,5 +5,11 @@ export function getHostname() {
 }
 
 export function getOwnMac() {
+  const ifs = os.networkInterfaces()
+  for (const property in ifs) {
+    if( /^e[tn]/.test(property) ) {
+      return(ifs[property][0].mac)
+    }
+  }
   return "00:11:22:33:44:55"
 }
