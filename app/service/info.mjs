@@ -10,6 +10,7 @@ export function getFid (functionName) {
   const hmac = crypto.createHmac('md5', 'X')
   hmac.update(functionName)
   hmac.update(getOwnMac())
+  hmac.update(process.env.SMN_PORT)
   return hmac.digest('hex')
 }
 
