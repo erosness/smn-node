@@ -9,7 +9,7 @@ import {infoMiddleware} from './service/info';
 
 import express from 'express';
 const app = express()
-const port = 5066
+const port = process.env.SMN_PORT
 
 app.get('/', (req, res) => res.send(`Hello World at ${getHostname()}\n`))
 
