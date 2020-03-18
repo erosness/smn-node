@@ -13,3 +13,12 @@ export function getOwnMac() {
   }
   return "00:11:22:33:44:55"
 }
+
+export function getIp() {
+  const ifs = os.networkInterfaces()
+  for (const property in ifs) {
+    if( /^e[tn]/.test(property) ) {
+      return(ifs[property][0].address)
+    }
+  }
+}
