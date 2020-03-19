@@ -31,4 +31,4 @@ app.use('/v1/beha/temp' , tempMiddleware)
 app.get('/v1/beha/temp', tempGet)
 app.post('/v1/beha/temp', tempPost)
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`Example app listening on port ${port}`))
