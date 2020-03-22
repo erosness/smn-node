@@ -3,7 +3,7 @@ import {getHostname} from './access/system';
 
 import {servers} from './api/servers';
 import {info} from './api/info';
-import {heat} from './api/heat';
+import {general} from './api/heat';
 import {tempGet, tempPost} from './api/temp';
 import {tempMiddleware} from './service/temp';
 import {infoMiddleware} from './service/info';
@@ -24,7 +24,7 @@ app.use('/v1/beha/info', infoMiddleware)
 app.get('/v1/beha/info', info)
 
 // Heat API
-app.get('/v1/beha/heat', heat)
+app.get('/v1/beha/heat/*', general)
 
 // Temp API
 app.use('/v1/beha/temp' , tempMiddleware)
