@@ -15,19 +15,33 @@ export function fetchDb(funcName, tableName) {
 
   // Open database
   console.log("At database:", tableName, filepath)
+  let queryResult = []
 
   const db = new sqlite3.Database(filepath);
   db.serialize(()=> {
-    // Use REPLACE to add to table. If the same second is allready present,
-    // it will not be duplicated.
 
     let sqlstring = "SELECT * FROM ( " + tableName + ")"
     db.each(sqlstring, (err, result) => {
-      console.log("In each", err, result)
+      if(result.ison == 0){
+        result.ison = false
+      }else{
+        result.ison = true
+      }
+      queryResult.push(result)
     })
-    db.close();
   })
-//  let recObj = Object.assign({} ,updateObject)
-//  if (recObj.ison){recObj.ison = 1}else{recObj.ison = 0}
-//  recObj.mode = '"' + recObj.mode + '"'
+
+  return new Promise((resolve, reject)=>{
+    db.close((err)=> {
+      if(err){
+        reject(err)
+      }else{
+        const resultObject = {  length: queryResult.length,
+                          offset: 0,
+                          total: queryResult.length,
+                          items: queryResult }
+        resolve(resultObject)
+      }
+    })
+  })
 }

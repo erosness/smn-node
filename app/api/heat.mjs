@@ -19,7 +19,9 @@ export function generalGet( req, res ) {
     case 'weeks':
       console.log("Get table:",splitPath[4])
       fetchDb("heat",splitPath[4])
-      res.sendStatus(404)
+      .then((resultObject,err)=>{
+        res.send(JSON.stringify(resultObject))
+      })
       break;
     default:
       res.sendStatus(404)
