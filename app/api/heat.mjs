@@ -4,7 +4,6 @@ import { fetchDb } from '../access/database'
 
 export function generalGet( req, res ) {
   const splitPath = req.path.split('/')
-  console.log("At generalGet:", splitPath)
   switch (splitPath[4]) {
     case 'status':
       const responseObject = getSimulator(splitPath[3],splitPath[4])
@@ -17,7 +16,6 @@ export function generalGet( req, res ) {
     case 'hours':
     case 'days':
     case 'weeks':
-      console.log("Get table:",splitPath[4])
       fetchDb("heat",splitPath[4])
       .then((resultObject,err)=>{
         res.send(JSON.stringify(resultObject))

@@ -14,7 +14,6 @@ export function fetchDb(funcName, tableName) {
     + ".db"
 
   // Open database
-  console.log("At database:", tableName, filepath)
   let queryResult = []
 
   const db = new sqlite3.Database(filepath);
