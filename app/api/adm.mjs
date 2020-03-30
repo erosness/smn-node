@@ -1,6 +1,5 @@
 import {getHostname} from '../access/system'
-import {getAdmStatus} from '../service/adm'
 
 export function adm( req, res ) {
-  res.json(getAdmStatus())
+  res.json({x:1,y:"f"})
 }

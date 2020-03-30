@@ -22,3 +22,10 @@ export function getIp() {
     }
   }
 }
+
+export function getPairId (port) {
+  const hmac = crypto.createHmac('md5', 'X')
+  hmac.update(getOwnMac())
+  hmac.update(port)
+  return hmac.digest('hex')
+}
