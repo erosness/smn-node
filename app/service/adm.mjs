@@ -1,7 +1,7 @@
 import crypto from 'crypto'
 import {getHostname, getOwnMac} from '../access/system'
 
-export function infoMiddleware( req, res, next ) {
+export function admMiddleware( req, res, next ) {
 // no Info Middleware yet  console.log("At infoMiddleware!!")
   next()
 }
@@ -14,7 +14,7 @@ export function getFid (functionName) {
   return hmac.digest('hex')
 }
 
-export function getInfoStatus() {
+export function getAdmStatus() {
   return({
     name: getHostname(),
     mac:getOwnMac(),

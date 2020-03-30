@@ -1,5 +1,5 @@
 import { getHostname, getIp } from '../access/system'
-import { getPairId } from '../service/info'
+import { getPairId } from '../service/adm'
 
 export function servers( req, res ) {
   res.json([
