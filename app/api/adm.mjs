@@ -1,9 +1,9 @@
 import { fetchMySQL, insertMySQL, updateMySQL } from '../access/database'
 
 export function admGet( req, res) {
-  insertMySQL("units",req.query.nid)
+  insertMySQL("units",req.query.uid)
   .then((result) => {
-    return fetchMySQL("units",req.query.nid)
+    return fetchMySQL("units",req.query.uid)
   })
   .then((result) => {
       res.json(result)
@@ -18,7 +18,7 @@ export function admGet( req, res) {
 }
 
 export function admPost( req, res, next ) {
-  updateMySQL("units", req.query.nid, req.body)
+  updateMySQL("units", req.query.uid, req.body)
   .then((result) => {
       if(result.affectedRows != 1) {
         res.status(500)
