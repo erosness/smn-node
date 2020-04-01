@@ -2,9 +2,8 @@ import {configInfo} from './config/configInfo';
 import {getHostname} from './access/system';
 
 import {servers} from './api/servers';
-import {adm} from './api/adm';
+import {admGet, admPost} from './api/adm';
 import {node} from './api/node';
-import {admMiddleware} from './service/adm';
 import {nodeMiddleware} from './service/node';
 
 import express from 'express';
@@ -23,8 +22,8 @@ app.use('/v1/beha/node', nodeMiddleware)
 app.get('/v1/beha/node', node)
 
 // Adm API
-app.use('/v1/beha/adm', admMiddleware)
-app.get('/v1/beha/adm', adm)
+app.get('/v1/beha/adm', admGet)
+app.post('/v1/beha/adm',admPost, admGet)
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}`))
