@@ -6,7 +6,7 @@ export function admGet( req, res) {
     return fetchMySQL("units",req.query.uid)
   })
   .then((result) => {
-      res.json(result)
+      res.json(result[0])
       return result
   })
   .catch((error) => {
