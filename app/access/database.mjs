@@ -13,10 +13,8 @@ export function fetchMySQL(tableName, uid) {
   })
 
   const sqlstring = 'SELECT * FROM units WHERE uid=' + db.escape(uid) + ';'
-//  console.log("string:", sqlstring)
   return new Promise((resolve, reject) => {
     db.query(sqlstring, (error, results, fields) => {
-//      console.log("Query callback:",error)
       if(error != undefined){
         reject(error)
       }else{
@@ -39,10 +37,8 @@ export function insertMySQL(tableName, uid) {
                     + '(uid) VALUES('
                     + db.escape(uid)
                     + ');'
-  console.log("string:", sqlstring)
   return new Promise((resolve, reject) => {
     db.query(sqlstring, (error, results, fields) => {
-      console.log("Query callback:",error,results)
       if(error != undefined){
         reject(error)
       }else{
@@ -52,7 +48,7 @@ export function insertMySQL(tableName, uid) {
   })
 }
 
-export function updateMySql(tableName, uid, data) {
+export function updateMySQL(tableName, uid, data) {
   const db = new mysql.createConnection({
     host: 'mysql02.uniweb.no',
     user: 'd33634',
@@ -61,21 +57,24 @@ export function updateMySql(tableName, uid, data) {
     database: 'd33634',
   })
 
-  let assignmentList = []
-  for(let ix in data.keys) {
-    console-log("The keys", ix)
+  let assignmentString = ''
+  for(let ix of Object.keys(data)) {
+    if(assignmentString != ''){
+      assignmentString += ', '
+    }
+    assignmentString += ix + ' = ' + db.escape(data[ix])
   }
 
   const sqlstring = 'UPDATE '
                     + tableName
                     + ' SET '
+                    + assignmentString
+                    + ' WHERE uid = '
                     + db.escape(uid)
-                    + ');'
-  console.log("string:", sqlstring)
-  /*
+                    + ';'
+
   return new Promise((resolve, reject) => {
     db.query(sqlstring, (error, results, fields) => {
-      console.log("Query callback:",error,results)
       if(error != undefined){
         reject(error)
       }else{
@@ -83,5 +82,4 @@ export function updateMySql(tableName, uid, data) {
       }
     })
   })
-  */
 }

@@ -12,6 +12,9 @@ const app = express()
 const port = process.env.SMN_PORT
 
 app.use(cors())
+app.use(express.json())
+//app.use(express.urlencoded({ extended: true }))
+
 app.get('/', (req, res) => res.send(`Hello World at ${getHostname()}\n`))
 
 // Servers API
@@ -23,7 +26,7 @@ app.get('/v1/beha/node', node)
 
 // Adm API
 app.get('/v1/beha/adm', admGet)
-app.post('/v1/beha/adm',admPost, admGet)
+app.post('/v1/beha/adm', admPost, admGet)
 
 
 app.listen(port, () => console.log(`Example app listening on port ${port}`))

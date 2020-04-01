@@ -1,18 +1,15 @@
-import { fetchMySQL, insertMySQL } from '../access/database'
+import { fetchMySQL, insertMySQL, updateMySQL } from '../access/database'
 
 export function admGet( req, res) {
-// no Info Middleware yet  console.log("At infoMiddleware!!")
   insertMySQL("units",req.query.nid)
   .then((result) => {
     return fetchMySQL("units",req.query.nid)
   })
   .then((result) => {
-      console.log("Result=", result)
       res.json(result)
       return result
-    })
+  })
   .catch((error) => {
-    console.log("Error=", error.errno)
     if(error != undefined) {
       res.status(500)
          .send('500 Interal server error: MySql error ' + error.errno + "\n")
@@ -21,6 +18,21 @@ export function admGet( req, res) {
 }
 
 export function admPost( req, res, next ) {
-  console.log("At admPost:", req.query.nid)
-  next()
+  updateMySQL("units", req.query.nid, req.body)
+  .then((result) => {
+      if(result.affectedRows != 1) {
+        res.status(500)
+           .send('500 Interal server error: Rows affeced = '
+           + result.affectedRows
+           + ", expected 1.\n")
+      }else{
+        return next()
+      }
+  })
+  .catch((error) => {
+    if(error != undefined) {
+      res.status(500)
+         .send('500 Interal server error: MySql error ' + error.errno + "\n")
+    }
+  })
 }
